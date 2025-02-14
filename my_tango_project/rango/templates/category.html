@@ -1,1 +1,14 @@
-﻿
+﻿<h1>{{ category.name }}</h1>
+{% if category %}
+  <p>Category views: {{ category.views }}, likes: {{ category.likes }}</p>
+  <ul>
+    {% for page in pages %}
+      <li><a href="{{ page.url }}">{{ page.title }}</a> ({{ page.views }} views)</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <strong>The specified category does not exist!</strong>
+{% endif %}
+<p><a href="{% url 'index' %}">Back to index</a></p>
+<p><a href="{% url 'index' %}">Return to Index</a></p>
+<a href="{% url 'add_page' category.slug %}">Add a New Page</a>

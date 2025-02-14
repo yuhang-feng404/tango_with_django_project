@@ -1,1 +1,40 @@
-﻿
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Rango</title>
+</head>
+<body>
+    <h1>Rango says...</h1>
+    <p>Hey there partner!</p>
+</body>
+</html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<h2>Most Viewed Pages</h2>
+<ul>
+  {% if pages %}
+    {% for p in pages %}
+      <li>
+        <a href="{{ p.url }}">{{ p.title }}</a> ({{ p.views }} views)
+      </li>
+    {% endfor %}
+  {% else %}
+    <strong>There are no pages present.</strong>
+  {% endif %}
+</ul>
+<a href="{% url 'add_category' %}">Add a New Category</a>
+{% extends 'rango/base.html' %}
+
+{% block body_block %}
+  <h1>Welcome to Rango!</h1>
+  <p>You have visited this site {{ visits }} times.</p>
+{% endblock %}
+{% extends 'rango/base.html' %}
+
+{% block body_block %}
+  <h1>Welcome to Rango!</h1>
+  <p>You have visited this site {{ visits }} times.</p>
+  <a href="{% url 'reset_visits' %}" class="btn btn-danger">Reset Visits</a>
+{% endblock %}
+<a href="{% url 'clear_session' %}" class="btn btn-warning">Clear Session</a>
+
